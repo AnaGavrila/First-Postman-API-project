@@ -1,0 +1,476 @@
+{
+	"info": {
+		"_postman_id": "522de98d-b162-4539-976c-b55f381ae6af",
+		"name": "Reddit API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34508138"
+	},
+	"item": [
+		{
+			"name": "Get access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Token is returned\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"access_token\");\r",
+							"    pm.expect(jsonData.access_token).to.be.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic SHhTWFFuRUFrLS1SNGN1Z2ZHbURTUTpoWlR3Vk43SWd3bzNIdklHekVCa2oxa0hiZUJQOFE=",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "Legitimate_Mammoth16",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Ana2501..",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://www.reddit.com/api/v1/access_token",
+					"protocol": "https",
+					"host": [
+						"www",
+						"reddit",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"access_token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Informatii despre utilizatorul autentificat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains user information\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData).to.have.property(\"created\");\r",
+							"    pm.expect(jsonData).to.have.property(\"link_karma\");\r",
+							"    pm.expect(jsonData).to.have.property(\"comment_karma\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzIxNzQ5MTgxLjYwODMzNiwiaWF0IjoxNzIxNjYyNzgxLjYwODMzNiwianRpIjoib3JZTV9USzFsbkNIZF9LUnBaQzA1NEdRUnNMeUtRIiwiY2lkIjoiSHhTWFFuRUFrLS1SNGN1Z2ZHbURTUSIsImxpZCI6InQyXzE1MHEwbTV4dXkiLCJhaWQiOiJ0Ml8xNTBxMG01eHV5IiwibGNhIjoxNzIxNTg0NjYwNDYxLCJzY3AiOiJlSnlLVnRKU2lnVUVBQURfX3dOekFTYyIsImZsbyI6OX0.RpsarNJzLE3Rxu-zGJNQopizCBv74ywVUyQSkYUFwizKAoiH9-Gz2vpO2n8xJ1EHgmP79vivCrK_MH2qUvs2Ya8vacRmwtpA5BazePqgQewaVG4JkmUr0grECtlDfodePasslJjwmvblxLRaJFVXh1k38DCY4TSj2ZmNWEaBuyhhHuIuyXbWbx7UU54IiMhgB8T7xCgxIZrJ9h4AxoRc5Un5iz-xPCoCnxY2xCGuIi8ZMzNY0aYrWbZYBPf_qw4hR3xgSG81I70qA4ko8N3n466l9nh2Sg1ZmiJXnO243XrGwk4ApnvN9MNO-EbuGl-jgSvZYeMbiofv4o-yXysLvQ",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Proiect",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://oauth.reddit.com/api/v1/me",
+					"protocol": "https",
+					"host": [
+						"oauth",
+						"reddit",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "preferintele utilizatorului",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains preferences information\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"show_link_flair\");\r",
+							"    pm.expect(jsonData).to.have.property(\"nightmode\");\r",
+							"    pm.expect(jsonData).to.have.property(\"email_comment_reply\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzIxNzQ5MTgxLjYwODMzNiwiaWF0IjoxNzIxNjYyNzgxLjYwODMzNiwianRpIjoib3JZTV9USzFsbkNIZF9LUnBaQzA1NEdRUnNMeUtRIiwiY2lkIjoiSHhTWFFuRUFrLS1SNGN1Z2ZHbURTUSIsImxpZCI6InQyXzE1MHEwbTV4dXkiLCJhaWQiOiJ0Ml8xNTBxMG01eHV5IiwibGNhIjoxNzIxNTg0NjYwNDYxLCJzY3AiOiJlSnlLVnRKU2lnVUVBQURfX3dOekFTYyIsImZsbyI6OX0.RpsarNJzLE3Rxu-zGJNQopizCBv74ywVUyQSkYUFwizKAoiH9-Gz2vpO2n8xJ1EHgmP79vivCrK_MH2qUvs2Ya8vacRmwtpA5BazePqgQewaVG4JkmUr0grECtlDfodePasslJjwmvblxLRaJFVXh1k38DCY4TSj2ZmNWEaBuyhhHuIuyXbWbx7UU54IiMhgB8T7xCgxIZrJ9h4AxoRc5Un5iz-xPCoCnxY2xCGuIi8ZMzNY0aYrWbZYBPf_qw4hR3xgSG81I70qA4ko8N3n466l9nh2Sg1ZmiJXnO243XrGwk4ApnvN9MNO-EbuGl-jgSvZYeMbiofv4o-yXysLvQ",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Proiect",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://oauth.reddit.com/api/v1/me/prefs",
+					"protocol": "https",
+					"host": [
+						"oauth",
+						"reddit",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"me",
+						"prefs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "karma utilizatorului",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains karma information\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"data\");\r",
+							"    pm.expect(jsonData.data).to.be.an(\"array\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzIxNzQ5MTgxLjYwODMzNiwiaWF0IjoxNzIxNjYyNzgxLjYwODMzNiwianRpIjoib3JZTV9USzFsbkNIZF9LUnBaQzA1NEdRUnNMeUtRIiwiY2lkIjoiSHhTWFFuRUFrLS1SNGN1Z2ZHbURTUSIsImxpZCI6InQyXzE1MHEwbTV4dXkiLCJhaWQiOiJ0Ml8xNTBxMG01eHV5IiwibGNhIjoxNzIxNTg0NjYwNDYxLCJzY3AiOiJlSnlLVnRKU2lnVUVBQURfX3dOekFTYyIsImZsbyI6OX0.RpsarNJzLE3Rxu-zGJNQopizCBv74ywVUyQSkYUFwizKAoiH9-Gz2vpO2n8xJ1EHgmP79vivCrK_MH2qUvs2Ya8vacRmwtpA5BazePqgQewaVG4JkmUr0grECtlDfodePasslJjwmvblxLRaJFVXh1k38DCY4TSj2ZmNWEaBuyhhHuIuyXbWbx7UU54IiMhgB8T7xCgxIZrJ9h4AxoRc5Un5iz-xPCoCnxY2xCGuIi8ZMzNY0aYrWbZYBPf_qw4hR3xgSG81I70qA4ko8N3n466l9nh2Sg1ZmiJXnO243XrGwk4ApnvN9MNO-EbuGl-jgSvZYeMbiofv4o-yXysLvQ",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Proiect",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://oauth.reddit.com/api/v1/me/karma",
+					"protocol": "https",
+					"host": [
+						"oauth",
+						"reddit",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"me",
+						"karma"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stergerea unei postari",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response indicates success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"object\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzIxNzUwNzc0LjI0MTQxNywiaWF0IjoxNzIxNjY0Mzc0LjI0MTQxNywianRpIjoieG0yRW9DRkZrczVvaVFQREZ3SW96UU5uYi1vZGpBIiwiY2lkIjoiSHhTWFFuRUFrLS1SNGN1Z2ZHbURTUSIsImxpZCI6InQyXzE1MHEwbTV4dXkiLCJhaWQiOiJ0Ml8xNTBxMG01eHV5IiwibGNhIjoxNzIxNTg0NjYwNDYxLCJzY3AiOiJlSnlLVnRKU2lnVUVBQURfX3dOekFTYyIsImZsbyI6OX0.Zyrcwzm3tIFgx4UfVQ316djzc9nrYMIdDeXgojL3wCpunFHeB29l3yqcL0cOAzNgq-jVKsPCata6r5wSpiqOECq0qCfdSOFQ7R_53BDhbkwhuv85Fawwd6l1NghQkSr4toiWjgNQxWcGPRdObrw2CEhBEIib7ZWUtyst0lGbEubjLMBHgAFI8lk6xMvKeOfZJqemZklgKRRJQjPT2FiO94AQEgye27kPIt4Dp6MupGPzggaCV5Xb9zLL2h_3E-4vgC87TgCUDKXW__ePWMzeZWUtO743iZnSBuOeLLi8J2D2jDoYXfMMxX0zJ8ZzuV-48PO_DVyglmSsQTlakvECOg",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Proiect",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "1e997i7",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://oauth.reddit.com/api/del",
+					"protocol": "https",
+					"host": [
+						"oauth",
+						"reddit",
+						"com"
+					],
+					"path": [
+						"api",
+						"del"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stergerea unui comentariu",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response indicates success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"object\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzIxNzUwNzc0LjI0MTQxNywiaWF0IjoxNzIxNjY0Mzc0LjI0MTQxNywianRpIjoieG0yRW9DRkZrczVvaVFQREZ3SW96UU5uYi1vZGpBIiwiY2lkIjoiSHhTWFFuRUFrLS1SNGN1Z2ZHbURTUSIsImxpZCI6InQyXzE1MHEwbTV4dXkiLCJhaWQiOiJ0Ml8xNTBxMG01eHV5IiwibGNhIjoxNzIxNTg0NjYwNDYxLCJzY3AiOiJlSnlLVnRKU2lnVUVBQURfX3dOekFTYyIsImZsbyI6OX0.Zyrcwzm3tIFgx4UfVQ316djzc9nrYMIdDeXgojL3wCpunFHeB29l3yqcL0cOAzNgq-jVKsPCata6r5wSpiqOECq0qCfdSOFQ7R_53BDhbkwhuv85Fawwd6l1NghQkSr4toiWjgNQxWcGPRdObrw2CEhBEIib7ZWUtyst0lGbEubjLMBHgAFI8lk6xMvKeOfZJqemZklgKRRJQjPT2FiO94AQEgye27kPIt4Dp6MupGPzggaCV5Xb9zLL2h_3E-4vgC87TgCUDKXW__ePWMzeZWUtO743iZnSBuOeLLi8J2D2jDoYXfMMxX0zJ8ZzuV-48PO_DVyglmSsQTlakvECOg",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Proiect",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "1e997i7",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://oauth.reddit.com/api/del",
+					"protocol": "https",
+					"host": [
+						"oauth",
+						"reddit",
+						"com"
+					],
+					"path": [
+						"api",
+						"del"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizează flair-ul unui utilizator",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response indicates flair update\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"object\");\r",
+							"    pm.expect(jsonData).to.have.property(\"json\");\r",
+							"    pm.expect(jsonData.json).to.have.property(\"errors\").that.is.an(\"array\").that.is.empty;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzIxNzUwNzc0LjI0MTQxNywiaWF0IjoxNzIxNjY0Mzc0LjI0MTQxNywianRpIjoieG0yRW9DRkZrczVvaVFQREZ3SW96UU5uYi1vZGpBIiwiY2lkIjoiSHhTWFFuRUFrLS1SNGN1Z2ZHbURTUSIsImxpZCI6InQyXzE1MHEwbTV4dXkiLCJhaWQiOiJ0Ml8xNTBxMG01eHV5IiwibGNhIjoxNzIxNTg0NjYwNDYxLCJzY3AiOiJlSnlLVnRKU2lnVUVBQURfX3dOekFTYyIsImZsbyI6OX0.Zyrcwzm3tIFgx4UfVQ316djzc9nrYMIdDeXgojL3wCpunFHeB29l3yqcL0cOAzNgq-jVKsPCata6r5wSpiqOECq0qCfdSOFQ7R_53BDhbkwhuv85Fawwd6l1NghQkSr4toiWjgNQxWcGPRdObrw2CEhBEIib7ZWUtyst0lGbEubjLMBHgAFI8lk6xMvKeOfZJqemZklgKRRJQjPT2FiO94AQEgye27kPIt4Dp6MupGPzggaCV5Xb9zLL2h_3E-4vgC87TgCUDKXW__ePWMzeZWUtO743iZnSBuOeLLi8J2D2jDoYXfMMxX0zJ8ZzuV-48PO_DVyglmSsQTlakvECOg",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Proiect",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "api_type",
+							"value": "json",
+							"type": "text"
+						},
+						{
+							"key": "css_class",
+							"value": "new_flair_class",
+							"type": "text"
+						},
+						{
+							"key": "link",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "PorkyPigXXX",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "hey",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://oauth.reddit.com/api/flair",
+					"protocol": "https",
+					"host": [
+						"oauth",
+						"reddit",
+						"com"
+					],
+					"path": [
+						"api",
+						"flair"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
